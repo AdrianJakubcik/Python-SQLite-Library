@@ -12,7 +12,6 @@ class Database:
 
         _dir = "../Database_Files_Here"
         __file = self._file(_dir)
-        print(__file)
         assert self._isDatabaseFile(__file), f'{__file} is not a database file!'
 
         self._databaseName = self._parseFileName(__file)
@@ -44,12 +43,13 @@ class Database:
     
     def _parseFileName(self, _file):
         filename, extension = os.path.splitext(_file)
-        return name
+        return filename
 
     def _connection(self, _database):
+        _dbFile = "../Database_Files_Here/"+_database
         conn = None
         try:
-            conn = sqlite3.connect(_database)
+            conn = sqlite3.connect(_dbFile)
             return conn
         except Error as e:
             raise Exception(e)
